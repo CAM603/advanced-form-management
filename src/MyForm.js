@@ -4,8 +4,12 @@ import * as Yup from 'yup';
 import axios from 'axios';
 
 const MyForm = ({values, errors, touched, status}) => {
-
-    return (
+    const [signUp, setSignUp] = useState([]);
+    useEffect(() => {
+        console.log("Status has changed", status);
+        status && setSignUp(signUp =>  [...signUp, status]);
+    }, [status]);
+    return (    
         <div style={{background: '#BADA22'}}>
             <Form>
                 <label htmlFor="name">
@@ -40,8 +44,19 @@ const MyForm = ({values, errors, touched, status}) => {
                     Terms and conditions
                 </label>
                 <Field id="terms" type="checkbox" name="terms" checked={values.terms}/>
+                {touched.terms && errors.terms && (
+                    <p>{errors.terms}</p>
+                )}
                 <button type="submit">Submit</button>
             </Form>
+            {signUp.map(el => (
+                <ul key={el.id}>
+                    <li>Name: {el.name}</li>
+                    <li>Email: {el.email}</li>
+                    <li>Password: {el.password}</li>
+                    <li>Username: {el.username}</li>
+                </ul>
+            ))}
         </div>
     )
 }
