@@ -87,11 +87,11 @@ const FormikLoginForm = withFormik({
         }
     },
     validationSchema: Yup.object().shape({
-        name: Yup.string().required(),
-        email: Yup.string().required(),
-        password: Yup.string().required(),
-        username: Yup.string().required(),
-        terms: Yup.bool().required()
+        name: Yup.string().required("enter your name"),
+        email: Yup.string().required("enter your email"),
+        password: Yup.string().required("password is not strong enough"),
+        username: Yup.string().required("enter username"),
+        terms: Yup.bool().required("agree to the terms")
     }),
     handleSubmit(values, { setStatus, resetForm }) {
         console.log(values)
