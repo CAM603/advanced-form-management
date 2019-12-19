@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
+import { Button, FormText } from 'reactstrap';
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -10,54 +11,68 @@ const MyForm = ({values, errors, touched, status}) => {
         status && setSignUp(signUp =>  [...signUp, status]);
     }, [status]);
     return (    
-        <div style={{background: '#BADA22'}}>
-            <Form>
-                <label htmlFor="name">
-                    Name
-                </label>
-                <Field id="name" type="text" name="name"/>
-                {touched.name && errors.name && (
-                    <p>{errors.name}</p>
-                )}
-                <label>
-                    Email
-                </label>
-                <Field id="email" type="text" name="email"/>
-                {touched.email && errors.email && (
-                    <p>{errors.email}</p>
-                )}
-                <label>
-                    Password
-                </label>
-                <Field id="password" type="text" name="password"/>
-                {touched.password && errors.password && (
-                    <p>{errors.password}</p>
-                )}
-                <label>
-                    Username
-                </label>
-                <Field id="username" type="text" name="username"/>
-                {touched.username && errors.username && (
-                    <p>{errors.username}</p>
-                )}
-                <label>
-                    Terms and conditions
-                </label>
-                <Field id="terms" type="checkbox" name="terms" checked={values.terms}/>
-                {touched.terms && errors.terms && (
-                    <p>{errors.terms}</p>
-                )}
-                <button type="submit">Submit</button>
-            </Form>
-            {signUp.map(el => (
-                <ul key={el.id}>
-                    <li>Name: {el.name}</li>
-                    <li>Email: {el.email}</li>
-                    <li>Password: {el.password}</li>
-                    <li>Username: {el.username}</li>
-                </ul>
-            ))}
-        </div>
+        <>
+            <div className="formContainer">
+                <Form>
+                        <div className="form">
+                            <label htmlFor="name">
+                                Name
+                            </label>
+                            <Field id="name" type="text" name="name"/>
+                            {touched.name && errors.name && (
+                                <FormText>{errors.name}</FormText>
+                            )}
+                        </div>
+                        <div className="form">
+                            <label>
+                                Email
+                            </label>
+                            <Field id="email" type="text" name="email"/>
+                            {touched.email && errors.email && (
+                                <FormText>{errors.email}</FormText>
+                            )}
+                        </div>
+                        <div className="form">
+                            <label>
+                                Password
+                            </label>
+                            <Field id="password" type="text" name="password"/>
+                            {touched.password && errors.password && (
+                                <FormText>{errors.password}</FormText>
+                            )}
+                        </div>
+                        <div className="form">
+                            <label>
+                                Username
+                            </label>
+                            <Field id="username" type="text" name="username"/>
+                            {touched.username && errors.username && (
+                                <FormText>{errors.username}</FormText>
+                            )}
+                        </div>
+                        <div className="form">
+                            <label>
+                                Agree to terms and conditions
+                            </label>
+                            <Field id="terms" type="checkbox" name="terms" checked={values.terms}/>
+                            {touched.terms && errors.terms && (
+                                <FormText>{errors.terms}</FormText>
+                            )}
+                        </div>
+                        <div className="buttonContainer">
+                            <Button color="primary" type="submit">Submit</Button>
+                        </div>
+                    </Form>
+            </div>
+                {signUp.map(el => (
+                    <div className="member" key={el.id}>
+                        <p>Name: {el.name}</p>
+                        <p>Email: {el.email}</p>
+                        <p>Password: {el.password}</p>
+                        <p>Username: {el.username}</p>
+                    </div>
+                ))}
+        </>
     )
 }
 
